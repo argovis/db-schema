@@ -82,6 +82,12 @@ pointSchema = {
             "bsonType": "string"
         }
     },
+    "platform_id": {
+        "bsonType": "string"
+    },
+    "platform_type": {
+        "bsonType": "string"
+    },
     "country": {
         "bsonType": "string"
     },
@@ -92,7 +98,7 @@ pointSchema = {
         "bsonType": "array",
         "items": {
             "bsonType": "object",
-            "required": ["source", "date_updated_source"],
+            "required": ["source"],
             "properties": {
                 "data_keys_source": {
                     "bsonType": "array",
@@ -145,12 +151,6 @@ argoSchemaExtension = {
     },
     "data_keys_mode": {
         "bsonType": "object"    
-    },
-    "platform_wmo_number": {
-        "bsonType": "int"
-    },
-    "platform_type": {
-        "bsonType": "string"
     },
     "positioning_system": {
         "bsonType": "string"
