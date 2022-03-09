@@ -38,7 +38,10 @@ pointSchema = {
         "bsonType": "string"
     },
     "data_warning": {
-        "bsonType": "string"
+        "bsonType": "array",
+        "items": {
+            "bsonType": "string"
+        }
     },
     "doi": {
         "bsonType": "string"
