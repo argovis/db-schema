@@ -18,7 +18,9 @@ def combineSchema(parent, ext):
     required = []
     required.extend(parent['required'])
     required.extend(ext['required'])
-    schema = {**parent, **ext}
+    schema = {"bsonType": "object"}
+    schema['properties'] = {**parent['properties'], **ext['properties']}
+    schema['dependencies'] = {**parent['dependencies'], **ext['dependencies']}
     schema['required'] = required
     return schema 
 
@@ -129,7 +131,7 @@ pointSchema = {
 
 argoSchemaExtension = {
   "bsonType": "object",
-  "required": ["cycle_number", "platform_wmo_number"],
+  "required": ["cycle_number"],
   "properties": {
     "profile_direction": {
         "bsonType": "string"
@@ -161,7 +163,8 @@ argoSchemaExtension = {
     "wmo_inst_type": {
         "bsonType": "string"
     }
-  }
+  },
+  "dependencies": {}
 }
 
 goshipSchemaExtension = {
@@ -178,7 +181,8 @@ goshipSchemaExtension = {
         "cchdo_cruise_id": {"bsonType": "int"},
         "cast": {"bsonType": "int"},
         "station": {"bsonType": "string"}
-    }
+    },
+    "dependencies": {}
 }
 
 argoProfile = combineSchema(pointSchema, argoSchemaExtension)
