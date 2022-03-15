@@ -8,8 +8,11 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-db.profilesx.drop()
-db.create_collection("profilesx")
+#db.profilesx.drop()
+#db.create_collection("profilesx")
+
+db.tc.drop()
+db.create_collection("tc")
 
 def combineSchema(parent, ext):
     # combine a parent and an extension dict into a single dict
@@ -191,7 +194,21 @@ goshipSchemaExtension = {
     "dependencies": {}
 }
 
+tropicalCycloneSchemaExtension = {
+    "bsonType": "object",
+    "required": [],
+    "properties": {
+        "name": {"bsonType": "string"},
+        "record_identifier": {"bsonType": "string"},
+        "class": {"bsonType": "string"},
+        "num": {"bsonType": "int"}
+    },
+    "dependencies": {}
+}
+
 argoProfile = combineSchema(pointSchema, argoSchemaExtension)
 goshipProfile = combineSchema(pointSchema, goshipSchemaExtension)
+tropicalCyclone = combineSchema(pointSchema, tropicalCycloneSchemaExtension)
 
-db.command('collMod','profilesx', validator={"$jsonSchema": {"oneOf": [argoProfile, goshipProfile]}}, validationLevel='strict')
+#db.command('collMod','profilesx', validator={"$jsonSchema": {"oneOf": [argoProfile, goshipProfile]}}, validationLevel='strict')
+db.command('collMod','tc', validator={"$jsonSchema": tropicalCyclone}, validationLevel='strict')
