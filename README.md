@@ -4,10 +4,12 @@ This repo contains scripts to create fresh collections in mongodb, including sch
 
 ## Oceanic Profiles
 
- - script: `oceanicProfiles.py`
- - collection: `profiles`
- - contents: Argo and GO-SHIP profiles.
+ - script: `pointSchema.py`
+ - collection: `profiles` and `tc`
+ - contents: Argo and GO-SHIP profiles, tropical cyclones.
 
 ## Gridded Products
 
-TBD
+ - script: `grids.py`, `grids-meta.py`
+ - collection: `grids-meta` for all grid metadata; each grid has its own collection.
+ - contents: currently the RG total temperature and salinity grids, and an OHC grid.
