@@ -1,6 +1,6 @@
-# usage: python oceanicProfiles.py
+# usage: python pointSchema.py
 # creates an empty, unindexed collection in the argo db with schema validation enforcement
-# permits argo or goship-flavored profiles
+# permits argo or goship-flavored profiles in `profiles`.
 
 from pymongo import MongoClient
 import sys
