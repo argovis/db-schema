@@ -210,5 +210,6 @@ argoProfile = combineSchema(pointSchema, argoSchemaExtension)
 goshipProfile = combineSchema(pointSchema, goshipSchemaExtension)
 tropicalCyclone = combineSchema(pointSchema, tropicalCycloneSchemaExtension)
 
-#db.command('collMod','profilesx', validator={"$jsonSchema": {"oneOf": [argoProfile, goshipProfile]}}, validationLevel='strict')
-db.command('collMod','tc', validator={"$jsonSchema": tropicalCyclone}, validationLevel='strict')
+#db.command('collMod','profiles', validator={"$jsonSchema": {"oneOf": [argoProfile, goshipProfile]}}, validationLevel='strict')
+#db.command('collMod','tc', validator={"$jsonSchema": tropicalCyclone}, validationLevel='strict')
+db.command('collMod','drifter', validator={"$jsonSchema": pointSchema}, validationLevel='strict') # no drifter schema extension; drifter-specific data is all in drifterMeta
