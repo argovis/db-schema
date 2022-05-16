@@ -11,8 +11,8 @@ db = client.argo
 #db.profilesx.drop()
 #db.create_collection("profilesx")
 
-db.tc.drop()
-db.create_collection("tc")
+db.drifters.drop()
+db.create_collection("drifters")
 
 def combineSchema(parent, ext):
     # combine a parent and an extension dict into a single dict
@@ -210,5 +210,6 @@ argoProfile = combineSchema(pointSchema, argoSchemaExtension)
 goshipProfile = combineSchema(pointSchema, goshipSchemaExtension)
 tropicalCyclone = combineSchema(pointSchema, tropicalCycloneSchemaExtension)
 
-#db.command('collMod','profilesx', validator={"$jsonSchema": {"oneOf": [argoProfile, goshipProfile]}}, validationLevel='strict')
-db.command('collMod','tc', validator={"$jsonSchema": tropicalCyclone}, validationLevel='strict')
+#db.command('collMod','profiles', validator={"$jsonSchema": {"oneOf": [argoProfile, goshipProfile]}}, validationLevel='strict')
+#db.command('collMod','tc', validator={"$jsonSchema": tropicalCyclone}, validationLevel='strict')
+db.command('collMod','drifters', validator={"$jsonSchema": pointSchema}, validationLevel='strict') # no drifter schema extension; drifter-specific data is all in drifterMeta
