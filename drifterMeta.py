@@ -52,6 +52,9 @@ driftermetaSchema = {
         },
         "typebuoy": {
             "bsonType": "string"
+        },
+        "source_url": {
+            "bsonType": "string"
         }
     }
 }
