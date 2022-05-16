@@ -11,8 +11,8 @@ db = client.argo
 #db.profilesx.drop()
 #db.create_collection("profilesx")
 
-db.tc.drop()
-db.create_collection("tc")
+db.drifters.drop()
+db.create_collection("drifters")
 
 def combineSchema(parent, ext):
     # combine a parent and an extension dict into a single dict
