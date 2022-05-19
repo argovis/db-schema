@@ -11,8 +11,8 @@ db = client.argo
 #db.profilesx.drop()
 #db.create_collection("profilesx")
 
-db.tc.drop()
-db.create_collection("tc")
+#db.tc.drop()
+#db.create_collection("tc")
 
 def combineSchema(parent, ext):
     # combine a parent and an extension dict into a single dict
@@ -82,7 +82,7 @@ pointSchema = {
         }
     },
     "timestamp": {
-        "bsonType": "date"
+        "bsonType": ["date", "null"]
     },
     "date_updated_argovis": {
         "bsonType": "date"
@@ -210,6 +210,6 @@ argoProfile = combineSchema(pointSchema, argoSchemaExtension)
 goshipProfile = combineSchema(pointSchema, goshipSchemaExtension)
 tropicalCyclone = combineSchema(pointSchema, tropicalCycloneSchemaExtension)
 
-#db.command('collMod','profiles', validator={"$jsonSchema": {"oneOf": [argoProfile, goshipProfile]}}, validationLevel='strict')
-db.command('collMod','tc', validator={"$jsonSchema": tropicalCyclone}, validationLevel='strict')
+db.command('collMod','profiles', validator={"$jsonSchema": {"oneOf": [argoProfile, goshipProfile]}}, validationLevel='strict')
+#db.command('collMod','tc', validator={"$jsonSchema": tropicalCyclone}, validationLevel='strict')
 
