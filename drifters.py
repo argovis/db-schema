@@ -14,7 +14,7 @@ db.create_collection('drifters')
 
 driftermetaSchema = {
     "bsonType": "object",
-    "required": ["_id", "rowsize", "WMO", "expno", "deploy_date", "deploy_lon", "deploy_lat", "end_date", "end_lon", "end_lat", "drogue_lost_date", "typedeath", "typebuoy", "data_type", "date_updated_argovis", "source_info", "data_keys"],
+    "required": ["_id", "rowsize", "WMO", "expno", "deploy_date", "deploy_lon", "deploy_lat", "end_date", "end_lon", "end_lat", "drogue_lost_date", "typedeath", "typebuoy", "data_type", "date_updated_argovis", "source_info", "data_keys", "units", "long_name"],
     "properties":{
         "_id": {
             "bsonType": "string"
@@ -84,15 +84,27 @@ driftermetaSchema = {
             "items": {
                 "bsonType": "string"
             }
+        },
+        "units": {
+            "bsonType": "array",
+            "items": {
+                "bsonType": ["string", "null"]
+            }
+        },
+        "long_name": {
+            "bsonType": "array",
+            "items": {
+                "bsonType": ["string", "null"]
+            }
         }
     }
 }
 
 drifterSchema = {
     "bsonType": "object",
-    "required": ["_id","geolocation","data","basin","timestamp"],
+    "required": ["metadata","geolocation","data","basin","timestamp"],
     "properties": {
-        "_id": {
+        "metadata": {
             "bsonType": "string"
         },
         "geolocation": {
