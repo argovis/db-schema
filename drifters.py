@@ -1,5 +1,5 @@
-# usage: python drifterMeta.py
-# creates an empty, unindexed collection in the argo db called drifterMeta with schema validation enforcement
+# usage: python drifters.py
+# creates empty, unindexed collections in the argo db called drifterMeta and drifters with schema validation enforcement
 
 from pymongo import MongoClient
 import sys
@@ -7,10 +7,10 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-db['drifterMeta'].drop()
-db.create_collection('drifterMeta')
-db['drifters'].drop()
-db.create_collection('drifters')
+db['drifterMetax'].drop()
+db.create_collection('drifterMetax')
+db['driftersx'].drop()
+db.create_collection('driftersx')
 
 driftermetaSchema = {
     "bsonType": "object",
@@ -23,10 +23,10 @@ driftermetaSchema = {
             "bsonType": "int"
         },
         "WMO": {
-            "bsonType": "double"
+            "bsonType": "int"
         },
         "expno": {
-            "bsonType": "double"
+            "bsonType": "int"
         },
         "deploy_date": {
             "bsonType": ["date", "null"]
@@ -50,7 +50,7 @@ driftermetaSchema = {
             "bsonType": ["date", "null"]
         },
         "typedeath": {
-            "bsonType": "double"
+            "bsonType": "int"
         },
         "typebuoy": {
             "bsonType": "string"
@@ -102,9 +102,12 @@ driftermetaSchema = {
 
 drifterSchema = {
     "bsonType": "object",
-    "required": ["metadata","geolocation","data","basin","timestamp"],
+    "required": ["platform","geolocation","data","basin","timestamp"],
     "properties": {
-        "metadata": {
+        "_id": {
+            "bsonType": "string"
+        },
+        "platform": {
             "bsonType": "string"
         },
         "geolocation": {
@@ -127,7 +130,10 @@ drifterSchema = {
         "data": {
             "bsonType": "array",
             "items": {
-                "bsonType": "array"
+                "bsonType": "array",
+                "items": {
+                    "bsonType": ["double", "int"]
+                }
             }
         },
         "basin": {
@@ -139,5 +145,5 @@ drifterSchema = {
     }
 }
 
-db.command('collMod','drifterMeta', validator={"$jsonSchema": driftermetaSchema}, validationLevel='strict')
-db.command('collMod','drifters', validator={"$jsonSchema": drifterSchema}, validationLevel='strict')
+db.command('collMod','drifterMetax', validator={"$jsonSchema": driftermetaSchema}, validationLevel='strict')
+db.command('collMod','driftersx', validator={"$jsonSchema": drifterSchema}, validationLevel='strict')
