@@ -1,5 +1,5 @@
-# usage: python drifters.py
-# creates empty collections in the argo db called drifterMeta and drifters with schema validation enforcement and defined indexes
+# usage: python tc.py
+# creates empty collections in the argo db called tcMeta and tc with schema validation enforcement and defined indexes
 
 from pymongo import MongoClient
 import sys
@@ -7,15 +7,15 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-db['drifterMetax'].drop()
-db.create_collection('drifterMetax')
-db['drifterx'].drop()
-db.create_collection('drifterx')
+db['tcMetax'].drop()
+db.create_collection('tcMetax')
+db['tcx'].drop()
+db.create_collection('tcx')
 
-driftermetaSchema = {
+tcMetaSchema = {
     "bsonType": "object",
-    "required": ["_id", "rowsize", "WMO", "expno", "deploy_date", "deploy_lon", "deploy_lat", "end_date", "end_lon", "end_lat", "drogue_lost_date", "typedeath", "typebuoy", "data_type", "date_updated_argovis", "source", "data_keys", "units", "long_name", "platform"],
-    "properties":{
+    "required": ["_id", "data_type", "data_keys", "units", "date_updated_argovis", "source", "name", "num"],
+    "properties":{ 
         "_id": {
             "bsonType": "string"
         },
@@ -48,64 +48,22 @@ driftermetaSchema = {
                         "items": {
                             "bsonType": "string"
                         }
-                    },
-                    "url": {
-                        "bsonType": "string",
                     }
                 }
             }
         },
-        "platform": {
+        "name": {
             "bsonType": "string"
         },
-        "rowsize": {
+        "num": {
             "bsonType": "int"
-        },
-        "WMO": {
-            "bsonType": "int"
-        },
-        "expno": {
-            "bsonType": "int"
-        },
-        "deploy_date": {
-            "bsonType": ["date", "null"]
-        },
-        "deploy_lon": {
-            "bsonType": "double"
-        },
-        "deploy_lat": {
-            "bsonType": "double"
-        },
-        "end_date": {
-            "bsonType": ["date", "null"]
-        },
-        "end_lon": {
-            "bsonType": "double"
-        },
-        "end_lat": {
-            "bsonType": "double"
-        },
-        "drogue_lost_date": {
-            "bsonType": ["date", "null"]
-        },
-        "typedeath": {
-            "bsonType": "int"
-        },
-        "typebuoy": {
-            "bsonType": "string"
-        },
-        "long_name": {
-            "bsonType": "array",
-            "items": {
-                "bsonType": ["string", "null"]
-            }
         }
     }
 }
 
-drifterSchema = {
+tcSchema = {
     "bsonType": "object",
-    "required": ["metadata","geolocation","data","basin","timestamp"],
+    "required": ["_id", "metadata", "geolocation", "basin", "timestamp", "data", "record_identifier", "class"],
     "properties": {
         "_id": {
             "bsonType": "string"
@@ -144,14 +102,18 @@ drifterSchema = {
                     "bsonType": ["double", "int", "null"]
                 }
             }
+        },
+        "record_identifier": {
+            "bsonType": "string"
+        },
+        "class": {
+            "bsonType": "string"
         }
     }
 }
 
-db.command('collMod','drifterMetax', validator={"$jsonSchema": driftermetaSchema}, validationLevel='strict')
-db['drifterMetax'].create_index([("WMO", 1)])
-db['drifterMetax'].create_index([("platform", 1)])
+db.command('collMod','tcMetax', validator={"$jsonSchema": tcMetaSchema}, validationLevel='strict')
 
-db.command('collMod','drifterx', validator={"$jsonSchema": drifterSchema}, validationLevel='strict')
-db['drifterx'].create_index([("timestamp", -1), ("geolocation", "2dsphere")])
-db['drifterx'].create_index([("geolocation", "2dsphere")])
+db.command('collMod','tcx', validator={"$jsonSchema": tcSchema}, validationLevel='strict')
+db['tcx'].create_index([("timestamp", -1), ("geolocation", "2dsphere")])
+db['tcx'].create_index([("geolocation", "2dsphere")])
