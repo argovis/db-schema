@@ -1,5 +1,5 @@
 # usage: python drifters.py
-# creates empty, unindexed collections in the argo db called drifterMeta and drifters with schema validation enforcement
+# creates empty collections in the argo db called drifterMeta and drifters with schema validation enforcement and defined indexes
 
 from pymongo import MongoClient
 import sys
@@ -7,10 +7,10 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-db['drifterMetax'].drop()
-db.create_collection('drifterMetax')
-db['driftersx'].drop()
-db.create_collection('driftersx')
+db['drifterMeta'].drop()
+db.create_collection('drifterMeta')
+db['drifters'].drop()
+db.create_collection('drifters')
 
 driftermetaSchema = {
     "bsonType": "object",
@@ -132,7 +132,7 @@ drifterSchema = {
             "items": {
                 "bsonType": "array",
                 "items": {
-                    "bsonType": ["double", "int"]
+                    "bsonType": ["double", "int", "null"]
                 }
             }
         },
@@ -145,5 +145,10 @@ drifterSchema = {
     }
 }
 
-db.command('collMod','drifterMetax', validator={"$jsonSchema": driftermetaSchema}, validationLevel='strict')
-db.command('collMod','driftersx', validator={"$jsonSchema": drifterSchema}, validationLevel='strict')
+db.command('collMod','drifterMeta', validator={"$jsonSchema": driftermetaSchema}, validationLevel='strict')
+db['drifterMeta'].create_index([("WMO", 1)])
+
+db.command('collMod','drifters', validator={"$jsonSchema": drifterSchema}, validationLevel='strict')
+db['drifters'].create_index([("platform", 1)])
+db['drifters'].create_index([("timestamp", -1), ("geolocation", "2dsphere")])
+db['drifters'].create_index([("geolocation", "2dsphere")])
