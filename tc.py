@@ -7,10 +7,10 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-db['tcMetax'].drop()
-db.create_collection('tcMetax')
-db['tcx'].drop()
-db.create_collection('tcx')
+db['tcMeta'].drop()
+db.create_collection('tcMeta')
+db['tc'].drop()
+db.create_collection('tc')
 
 tcMetaSchema = {
     "bsonType": "object",
@@ -112,8 +112,10 @@ tcSchema = {
     }
 }
 
-db.command('collMod','tcMetax', validator={"$jsonSchema": tcMetaSchema}, validationLevel='strict')
+db.command('collMod','tcMeta', validator={"$jsonSchema": tcMetaSchema}, validationLevel='strict')
+db['tc'].create_index([("name", 1)])
 
-db.command('collMod','tcx', validator={"$jsonSchema": tcSchema}, validationLevel='strict')
-db['tcx'].create_index([("timestamp", -1), ("geolocation", "2dsphere")])
-db['tcx'].create_index([("geolocation", "2dsphere")])
+db.command('collMod','tc', validator={"$jsonSchema": tcSchema}, validationLevel='strict')
+db['tc'].create_index([("metadata", 1)])
+db['tc'].create_index([("timestamp", -1), ("geolocation", "2dsphere")])
+db['tc'].create_index([("geolocation", "2dsphere")])
