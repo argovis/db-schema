@@ -153,5 +153,6 @@ db['drifterMetax'].create_index([("WMO", 1)])
 db['drifterMetax'].create_index([("platform", 1)])
 
 db.command('collMod','drifterx', validator={"$jsonSchema": drifterSchema}, validationLevel='strict')
+db['drifterx'].create_index([("metadata", 1)])
 db['drifterx'].create_index([("timestamp", -1), ("geolocation", "2dsphere")])
 db['drifterx'].create_index([("geolocation", "2dsphere")])
