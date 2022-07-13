@@ -1,5 +1,5 @@
 # usage: python grids.py <grid name>
-# creates an empty, unindexed collection in the argo db called <grid name> with schema validation enforcement
+# creates an empty, unindexed collection in the argo db called <grid name> with schema validation enforcement and defined indexes
 
 from pymongo import MongoClient
 import sys
@@ -13,9 +13,15 @@ db.create_collection(grid)
 
 gridSchema = {
     "bsonType": "object",
-    "required": ["g","t","d"],
-    "properties":{
-        "g": {
+    "required": ["metadata","geolocation","data","basin","timestamp"],
+    "properties": {
+        "_id": {
+            "bsonType": "string"
+        },
+        "metadata": {
+            "bsonType": "string"
+        },
+        "geolocation": {
             "bsonType": "object",
             "required": ["type", "coordinates"],
             "properties": {
@@ -32,17 +38,26 @@ gridSchema = {
                 }
             }
         },
-        "t": {
-            "bsonType": "date"
+        "basin": {
+            "bsonType": "int"
         },
-        "d": {
+        "timestamp": {
+            "bsonType": ["date", "null"]
+        },
+        "data": {
             "bsonType": "array",
             "items": {
-                "bsonType": ["double", "int"]
+                "bsonType": "array",
+                "items": {
+                    "bsonType": ["double", "int", "null"]
+                }
             }
         }
     }
 }
 
 db.command('collMod',grid, validator={"$jsonSchema": gridSchema}, validationLevel='strict')
+db[grid].create_index([("metadata", 1)])
+db[grid].create_index([("timestamp", -1), ("geolocation", "2dsphere")])
+db[grid].create_index([("geolocation", "2dsphere")])
 
