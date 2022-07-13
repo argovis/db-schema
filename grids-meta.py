@@ -27,7 +27,10 @@ gridmetaSchema = {
             }
         },
         "units": {
-            "bsonType": "string"
+            "bsonType": "array",
+            "items": {
+                "bsonType": ["string", "null"]
+            }
         },
         "date_updated_argovis": {
             "bsonType": "date"
