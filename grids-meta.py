@@ -49,6 +49,12 @@ gridmetaSchema = {
                     },
                     "url": {
                         "bsonType": "string",
+                    },
+                    "doi": {
+                        "bsonType": "string"
+                    },
+                    "date_updated": {
+                        "bsonType": "date"
                     }
                 }
             }

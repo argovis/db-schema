@@ -13,7 +13,7 @@ db.create_collection(grid)
 
 gridSchema = {
     "bsonType": "object",
-    "required": ["metadata","geolocation","data","basin","timestamp"],
+    "required": ["_id", "metadata","geolocation","data","basin","timestamp"],
     "properties": {
         "_id": {
             "bsonType": "string"
