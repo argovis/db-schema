@@ -14,7 +14,7 @@ db.create_collection('drifter')
 
 driftermetaSchema = {
     "bsonType": "object",
-    "required": ["_id", "rowsize", "WMO", "expno", "deploy_date", "deploy_lon", "deploy_lat", "end_date", "end_lon", "end_lat", "drogue_lost_date", "typedeath", "typebuoy", "data_type", "date_updated_argovis", "source", "data_keys", "units", "long_name", "platform"],
+    "required": ["_id", "rowsize", "wmo", "expno", "deploy_date", "deploy_lon", "deploy_lat", "end_date", "end_lon", "end_lat", "drogue_lost_date", "typedeath", "typebuoy", "data_type", "date_updated_argovis", "source", "data_keys", "units", "long_name", "platform"],
     "properties":{
         "_id": {
             "bsonType": "string"
@@ -61,7 +61,7 @@ driftermetaSchema = {
         "rowsize": {
             "bsonType": "int"
         },
-        "WMO": {
+        "wmo": {
             "bsonType": "int"
         },
         "expno": {
@@ -149,7 +149,7 @@ drifterSchema = {
 }
 
 db.command('collMod','drifterMeta', validator={"$jsonSchema": driftermetaSchema}, validationLevel='strict')
-db['drifterMeta'].create_index([("WMO", 1)])
+db['drifterMeta'].create_index([("wmo", 1)])
 db['drifterMeta'].create_index([("platform", 1)])
 
 db.command('collMod','drifter', validator={"$jsonSchema": drifterSchema}, validationLevel='strict')
