@@ -44,7 +44,7 @@ goshipmetaSchema = {
             "bsonType": "string"
         },
         "cchdo_cruise_id": {
-            "bsonType": "string"
+            "bsonType": ["double", "int"]
         },
         "woce_lines": {
             "bsonType": "array",
