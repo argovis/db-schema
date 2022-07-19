@@ -150,6 +150,7 @@ goshipSchema = {
 }
 
 db.command('collMod','goshipMeta', validator={"$jsonSchema": goshipmetaSchema}, validationLevel='strict')
+db['goshipMeta'].create_index([("woce_lines", 1)])
 
 db.command('collMod','goship', validator={"$jsonSchema": goshipSchema}, validationLevel='strict')
 db['goship'].create_index([("metadata", 1)])
