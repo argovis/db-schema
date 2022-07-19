@@ -142,7 +142,7 @@ goshipSchema = {
             "items": {
                 "bsonType": "array",
                 "items": {
-                    "bsonType": ["double", "int", "null"]
+                    "bsonType": ["double", "int", "string", "null"]
                 }
             }
         }
