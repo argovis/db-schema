@@ -113,7 +113,7 @@ goshipSchema = {
             }
         },
         "data_warning": {
-            "bsonType": "array"
+            "bsonType": "array",
             "items": {
                 "bsonType": "string",
                 "enum": ["degenerate_levels", "missing_basin", "missing_location", "missing_timestamp"]
