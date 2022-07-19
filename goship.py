@@ -132,7 +132,7 @@ goshipSchema = {
             }
         },
         "station": {
-            "bsonType": "int"
+            "bsonType": "string"
         },
         "cast": {
             "bsonType": "int"
