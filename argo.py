@@ -1,5 +1,5 @@
-# usage: python goship.py
-# creates empty collections in the argo db called goshipMeta and goship with schema validation enforcement and defined indexes
+# usage: python argo.py
+# creates empty collections in the argo db called argoMeta and argo with schema validation enforcement and defined indexes
 
 from pymongo import MongoClient
 import sys
