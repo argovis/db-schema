@@ -162,7 +162,10 @@ argoSchema = {
             "bsonType": "int"
         },
         "data_keys_mode": {
-            "bsonType": "object"
+            "bsonType": "array",
+            "items": {
+                "bsonType": ["string", "null"]
+            }
         },
         "geolocation_argoqc": {
             "bsonType": "int"
