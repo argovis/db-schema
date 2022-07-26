@@ -12,6 +12,8 @@ db.create_collection('argoMeta')
 db['argo'].drop()
 db.create_collection('argo')
 
+argo_measurements = ["bbp470","bbp532","bbp700","bbp700_2","bisulfide","cdom","chla","cndc","cndx","cp660","down_irradiance380","down_irradiance412","down_irradiance442","down_irradiance443","down_irradiance490","down_irradiance555","down_irradiance670","downwelling_par","doxy","doxy2","doxy3","molar_doxy","nitrate","ph_in_situ_total","pres","psal","psal_sfile","temp","temp_sfile","turbidity","up_radiance412","up_radiance443","up_radiance490","up_radiance555"]
+
 argoMetaSchema = {
     "bsonType": "object",
     "required": ["_id", "data_type"],
@@ -25,7 +27,8 @@ argoMetaSchema = {
         "data_keys": {
             "bsonType": "array",
             "items": {
-                "bsonType": "string"
+                "bsonType": "string",
+                "enum": argo_measurements
             }
         },
         "units": {
@@ -149,7 +152,8 @@ argoSchema = {
         "data_keys": {
             "bsonType": "array",
             "items": {
-                "bsonType": "string"
+                "bsonType": "string",
+                "enum": argo_measurements
             }
         },
         "units": {

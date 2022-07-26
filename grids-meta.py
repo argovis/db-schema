@@ -7,8 +7,8 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-db['gridMetax'].drop()
-db.create_collection('gridMetax')
+db['gridMeta'].drop()
+db.create_collection('gridMeta')
 
 gridmetaSchema = {
     "bsonType": "object",
@@ -23,7 +23,8 @@ gridmetaSchema = {
         "data_keys": {
             "bsonType": "array",
             "items": {
-                "bsonType": "string"
+                "bsonType": "string",
+                "enum": ["ohc_kg", "temperature_rg", "salinity_rg"]
             }
         },
         "units": {
@@ -51,10 +52,10 @@ gridmetaSchema = {
                         "bsonType": "string",
                     },
                     "doi": {
-                        "bsonType": "string"
+                        "bsonType": "string",
                     },
                     "date_updated": {
-                        "bsonType": "date"
+                        "bsonType": "date",
                     }
                 }
             }
@@ -98,5 +99,5 @@ gridmetaSchema = {
     }
 }
 
-db.command('collMod','gridMetax', validator={"$jsonSchema": gridmetaSchema}, validationLevel='strict')
+db.command('collMod','gridMeta', validator={"$jsonSchema": gridmetaSchema}, validationLevel='strict')
 
