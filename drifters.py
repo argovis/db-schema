@@ -25,7 +25,8 @@ driftermetaSchema = {
         "data_keys": {
             "bsonType": "array",
             "items": {
-                "bsonType": "string"
+                "bsonType": "string",
+                "enum": ["ve","vn","err_lon","err_lat","err_ve","err_vn","gap","sst","sst1","sst2","err_sst","err_sst1","err_sst2","flg_sst","flg_sst1","flg_sst2"]
             }
         },
         "units": {
@@ -51,6 +52,12 @@ driftermetaSchema = {
                     },
                     "url": {
                         "bsonType": "string",
+                    },
+                    "doi": {
+                        "bsonType": "string",
+                    },
+                    "date_updated": {
+                        "bsonType": "date",
                     }
                 }
             }
@@ -105,7 +112,7 @@ driftermetaSchema = {
 
 drifterSchema = {
     "bsonType": "object",
-    "required": ["metadata","geolocation","data","basin","timestamp"],
+    "required": ["_id","metadata","geolocation","data","basin","timestamp"],
     "properties": {
         "_id": {
             "bsonType": "string"

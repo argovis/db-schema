@@ -25,7 +25,8 @@ tcMetaSchema = {
         "data_keys": {
             "bsonType": "array",
             "items": {
-                "bsonType": "string"
+                "bsonType": "string",
+                "enum": ["wind", "surface_pressure"]
             }
         },
         "units": {
@@ -48,6 +49,15 @@ tcMetaSchema = {
                         "items": {
                             "bsonType": "string"
                         }
+                    },
+                    "url": {
+                        "bsonType": "string",
+                    },
+                    "doi": {
+                        "bsonType": "string",
+                    },
+                    "date_updated": {
+                        "bsonType": "date",
                     }
                 }
             }
