@@ -7,8 +7,10 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-db['gridMeta'].drop()
-db.create_collection('gridMeta')
+metacollection = 'gridMeta'
+
+db[metacollection].drop()
+db.create_collection(metacollection)
 
 gridmetaSchema = {
     "bsonType": "object",
@@ -99,5 +101,5 @@ gridmetaSchema = {
     }
 }
 
-db.command('collMod','gridMeta', validator={"$jsonSchema": gridmetaSchema}, validationLevel='strict')
+db.command('collMod',metacollection, validator={"$jsonSchema": gridmetaSchema}, validationLevel='strict')
 
