@@ -7,10 +7,13 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-db['drifterMeta'].drop()
-db.create_collection('drifterMeta')
-db['drifter'].drop()
-db.create_collection('drifter')
+metacollection = 'drifterMeta'
+datacollection = 'drifter'
+
+db[metacollection].drop()
+db.create_collection(metacollection)
+db[datacollection].drop()
+db.create_collection(datacollection)
 
 driftermetaSchema = {
     "bsonType": "object",
@@ -155,11 +158,11 @@ drifterSchema = {
     }
 }
 
-db.command('collMod','drifterMeta', validator={"$jsonSchema": driftermetaSchema}, validationLevel='strict')
-db['drifterMeta'].create_index([("wmo", 1)])
-db['drifterMeta'].create_index([("platform", 1)])
+db.command('collMod',metacollection, validator={"$jsonSchema": driftermetaSchema}, validationLevel='strict')
+db[metacollection].create_index([("wmo", 1)])
+db[metacollection].create_index([("platform", 1)])
 
-db.command('collMod','drifter', validator={"$jsonSchema": drifterSchema}, validationLevel='strict')
-db['drifter'].create_index([("metadata", 1)])
-db['drifter'].create_index([("timestamp", -1), ("geolocation", "2dsphere")])
-db['drifter'].create_index([("geolocation", "2dsphere")])
+db.command('collMod',datacollection, validator={"$jsonSchema": drifterSchema}, validationLevel='strict')
+db[datacollection].create_index([("metadata", 1)])
+db[datacollection].create_index([("timestamp", -1), ("geolocation", "2dsphere")])
+db[datacollection].create_index([("geolocation", "2dsphere")])

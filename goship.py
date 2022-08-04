@@ -7,10 +7,13 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-db['goshipMeta'].drop()
-db.create_collection('goshipMeta')
-db['goship'].drop()
-db.create_collection('goship')
+metacollection = 'goshipMeta'
+datacollection = 'goship'
+
+db[metacollection].drop()
+db.create_collection(metacollection)
+db[datacollection].drop()
+db.create_collection(datacollection)
 
 goshipmetaSchema = {
     "bsonType": "object",
@@ -150,11 +153,12 @@ goshipSchema = {
     }
 }
 
-db.command('collMod','goshipMeta', validator={"$jsonSchema": goshipmetaSchema}, validationLevel='strict')
-db['goshipMeta'].create_index([("woce_lines", 1)])
-db['goshipMeta'].create_index([("cchdo_cruise_id", 1)])
+db.command('collMod',metacollection, validator={"$jsonSchema": goshipmetaSchema}, validationLevel='strict')
+db[metacollection].create_index([("woce_lines", 1)])
+db[metacollection].create_index([("cchdo_cruise_id", 1)])
 
-db.command('collMod','goship', validator={"$jsonSchema": goshipSchema}, validationLevel='strict')
-db['goship'].create_index([("metadata", 1)])
-db['goship'].create_index([("timestamp", -1), ("geolocation", "2dsphere")])
-db['goship'].create_index([("geolocation", "2dsphere")])
+db.command('collMod',datacollection, validator={"$jsonSchema": goshipSchema}, validationLevel='strict')
+db[datacollection].create_index([("metadata", 1)])
+db[datacollection].create_index([("timestamp", -1), ("geolocation", "2dsphere")])
+db[datacollection].create_index([("geolocation", "2dsphere")])
+
