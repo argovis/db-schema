@@ -191,7 +191,6 @@ argoSchema = {
     }
 }
 
-print(argo_measurements)
 db.command('collMod',metacollection, validator={"$jsonSchema": argoMetaSchema}, validationLevel='strict')
 db[metacollection].create_index([("data_center", 1)])
 db[metacollection].create_index([("platform", 1)])
