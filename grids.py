@@ -59,5 +59,6 @@ gridSchema = {
 db.command('collMod',grid, validator={"$jsonSchema": gridSchema}, validationLevel='strict')
 db[grid].create_index([("metadata", 1)])
 db[grid].create_index([("timestamp", -1), ("geolocation", "2dsphere")])
+db[grid].create_index([("timestamp", -1)])
 db[grid].create_index([("geolocation", "2dsphere")])
 

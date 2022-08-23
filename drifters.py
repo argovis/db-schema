@@ -166,3 +166,4 @@ db.command('collMod',datacollection, validator={"$jsonSchema": drifterSchema}, v
 db[datacollection].create_index([("metadata", 1)])
 db[datacollection].create_index([("timestamp", -1), ("geolocation", "2dsphere")])
 db[datacollection].create_index([("geolocation", "2dsphere")])
+db[datacollection].create_index([("timestamp", -1)])

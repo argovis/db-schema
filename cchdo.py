@@ -1,5 +1,5 @@
-# usage: python goship.py
-# creates empty collections in the argo db called goshipMeta and goship with schema validation enforcement and defined indexes
+# usage: python cchdo.py
+# creates empty collections in the argo db called cchdoMeta and cchdo with schema validation enforcement and defined indexes
 
 from pymongo import MongoClient
 import sys
@@ -7,15 +7,15 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-metacollection = 'goshipMeta'
-datacollection = 'goship'
+metacollection = 'cchdoMeta'
+datacollection = 'cchdo'
 
 db[metacollection].drop()
 db.create_collection(metacollection)
 db[datacollection].drop()
 db.create_collection(datacollection)
 
-goshipmetaSchema = {
+cchdometaSchema = {
     "bsonType": "object",
     "required": ["_id", "date_updated_argovis", "data_type", "expocode", "cchdo_cruise_id", "woce_lines"],
     "properties":{
@@ -58,7 +58,7 @@ goshipmetaSchema = {
     }
 }
 
-goshipSchema = {
+cchdoSchema = {
     "bsonType": "object",
     "required": ["_id","metadata","geolocation","data","basin","timestamp", "data_keys", "units", "source", "station", "cast"],
     "properties": {
@@ -153,12 +153,14 @@ goshipSchema = {
     }
 }
 
-db.command('collMod',metacollection, validator={"$jsonSchema": goshipmetaSchema}, validationLevel='strict')
+db.command('collMod',metacollection, validator={"$jsonSchema": cchdometaSchema}, validationLevel='strict')
 db[metacollection].create_index([("woce_lines", 1)])
 db[metacollection].create_index([("cchdo_cruise_id", 1)])
 
-db.command('collMod',datacollection, validator={"$jsonSchema": goshipSchema}, validationLevel='strict')
+db.command('collMod',datacollection, validator={"$jsonSchema": cchdoSchema}, validationLevel='strict')
 db[datacollection].create_index([("metadata", 1)])
 db[datacollection].create_index([("timestamp", -1), ("geolocation", "2dsphere")])
+db[datacollection].create_index([("timestamp", -1)])
 db[datacollection].create_index([("geolocation", "2dsphere")])
+db[datacollection].create_index([("source.source", 1)])
 
