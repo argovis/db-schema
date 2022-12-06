@@ -194,6 +194,7 @@ argoSchema = {
 db.command('collMod',metacollection, validator={"$jsonSchema": argoMetaSchema}, validationLevel='strict')
 db[metacollection].create_index([("data_center", 1)])
 db[metacollection].create_index([("platform", 1)])
+db[metacollection].create_index([("platform_type", 1)])
 
 db.command('collMod',datacollection, validator={"$jsonSchema": argoSchema}, validationLevel='strict')
 db[datacollection].create_index([("metadata", 1)])
