@@ -14,26 +14,13 @@ db.create_collection(metacollection)
 
 gridmetaSchema = {
     "bsonType": "object",
-    "required": ["_id", "data_type", "data_keys", "units", "date_updated_argovis", "source", "levels", "lonrange", "latrange", "timerange", "loncell", "latcell"],
+    "required": ["_id", "data_type", "date_updated_argovis", "source", "levels"],
     "properties":{
         "_id": {
             "bsonType": "string"
         },
         "data_type": {
             "bsonType": "string"
-        },
-        "data_keys": {
-            "bsonType": "array",
-            "items": {
-                "bsonType": "string",
-                "enum": ["ohc_kg", "temperature_rg", "salinity_rg"]
-            }
-        },
-        "units": {
-            "bsonType": "array",
-            "items": {
-                "bsonType": ["string", "null"]
-            }
         },
         "date_updated_argovis": {
             "bsonType": "date"
@@ -67,36 +54,6 @@ gridmetaSchema = {
             "items": {
                 "bsonType": ["double", "int"]
             }
-        },
-        "lonrange": {
-            "bsonType": "array",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-                "bsonType": ["double", "int"]
-            }
-        },
-        "latrange": {
-            "bsonType": "array",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-                "bsonType": ["double", "int"]
-            }
-        },
-        "timerange": {
-            "bsonType": "array",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-                "bsonType": ["date"]
-            }
-        },
-        "loncell": {
-            "bsonType": ["double", "int"]
-        },
-        "latcell": {
-            "bsonType": ["double", "int"]
         }
     }
 }
