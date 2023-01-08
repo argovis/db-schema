@@ -7,7 +7,7 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-metacollection = 'gridMetax'
+metacollection = 'gridMeta'
 
 db[metacollection].drop()
 db.create_collection(metacollection)
