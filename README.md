@@ -10,10 +10,13 @@ In the event that you're populating a new MongoDB instance, start by building th
 python argo.py
 python cchdo.py
 python drifters.py
-python grids-meta.py
-python grids.py temperature_rg
-python grids.py salinity_rg
-python grids.py ohc_kg
+python grids.py rg09_temperature
+python grids-meta.py rg09_temperature
+python grids.py rg09_salinity
+python grids-meta.py rg09_salinity
+python grids.py kg21_ohc15to300
+python grids-meta.py kg21_ohc15to300
+python covar.py
 python tc.py
 ```
 
