@@ -99,8 +99,13 @@ argoSchema = {
             "bsonType": ["date", "null"]
         },
         "data": {
-            "bsonType": "object",
-            "properties": {x: {"bsonType": "array", "items": {"bsonType": ["double", "int", "string", "null"]}} for x in argo_measurements}
+            "bsonType": "array",
+            "items": {
+                "bsonType": "array",
+                "items": {
+                    "bsonType": ["double", "int", "string", "null"]
+                }
+            }
         },
         "measurement_metadata": {
             "bsonType": "array",

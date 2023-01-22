@@ -143,9 +143,14 @@ drifterSchema = {
             "bsonType": ["date", "null"]
         },
         "data": {
-            "bsonType": "object",
-            "properties": {x: {"bsonType": "array", "items": {"bsonType": ["double", "int", "string", "null"]}} for x in ["ve","vn","err_lon","err_lat","err_ve","err_vn","gap","sst","sst1","sst2","err_sst","err_sst1","err_sst2","flg_sst","flg_sst1","flg_sst2"]}
-        },
+            "bsonType": "array",
+            "items": {
+                "bsonType": "array",
+                "items": {
+                    "bsonType": ["double", "int", "string", "null"]
+                }
+            }
+        }
     }
 }
 

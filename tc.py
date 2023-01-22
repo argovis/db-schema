@@ -104,8 +104,13 @@ tcSchema = {
             "bsonType": ["date", "null"]
         },
         "data": {
-            "bsonType": "object",
-            "properties": {x: {"bsonType": "array", "items": {"bsonType": ["double", "int", "string", "null"]}} for x in ['wind', 'surface_pressure']}
+            "bsonType": "array",
+            "items": {
+                "bsonType": "array",
+                "items": {
+                    "bsonType": ["double", "int", "string", "null"]
+                }
+            }
         },
         "record_identifier": {
             "bsonType": "string"
