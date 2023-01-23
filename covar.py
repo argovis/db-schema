@@ -54,7 +54,7 @@ covarianceMetaSchema = {
         "levels": {
             "bsonType": "array",
             "items": {
-                "bsonType": ["int"]
+                "bsonType": ["int", "double"]
             }      
         }
        
