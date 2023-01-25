@@ -7,8 +7,8 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-metacollection = 'drifterMeta'
-datacollection = 'drifter'
+metacollection = 'drifterMetax'
+datacollection = 'drifterx'
 
 db[metacollection].drop()
 db.create_collection(metacollection)
@@ -17,7 +17,7 @@ db.create_collection(datacollection)
 
 driftermetaSchema = {
     "bsonType": "object",
-    "required": ["_id", "rowsize", "wmo", "expno", "deploy_date", "deploy_lon", "deploy_lat", "end_date", "end_lon", "end_lat", "drogue_lost_date", "typedeath", "typebuoy", "data_type", "date_updated_argovis", "source", "measurement_metadata", "platform"],
+    "required": ["_id", "rowsize", "wmo", "expno", "deploy_date", "deploy_lon", "deploy_lat", "end_date", "end_lon", "end_lat", "drogue_lost_date", "typedeath", "typebuoy", "data_type", "date_updated_argovis", "source", "data_info", "platform"],
     "properties":{
         "_id": {
             "bsonType": "string"
@@ -25,7 +25,7 @@ driftermetaSchema = {
         "data_type": {
             "bsonType": "string"
         },
-        "measurement_metadata": {
+        "data_info": {
             "bsonType": "array",
             "items": {
                 "bsonType": "array",
@@ -99,12 +99,6 @@ driftermetaSchema = {
         },
         "typebuoy": {
             "bsonType": "string"
-        },
-        "long_name": {
-            "bsonType": "array",
-            "items": {
-                "bsonType": ["string", "null"]
-            }
         }
     }
 }
@@ -117,7 +111,10 @@ drifterSchema = {
             "bsonType": "string"
         },
         "metadata": {
-            "bsonType": "string"
+            "bsonType": "array",
+            "items": {
+                "bsonType": "string"
+            }
         },
         "geolocation": {
             "bsonType": "object",
