@@ -7,8 +7,8 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-metacollection = 'tcMeta'
-datacollection = 'tc'
+metacollection = 'tcMetax'
+datacollection = 'tcx'
 
 db[metacollection].drop()
 db.create_collection(metacollection)
@@ -17,7 +17,7 @@ db.create_collection(datacollection)
 
 tcMetaSchema = {
     "bsonType": "object",
-    "required": ["_id", "data_type", "measurement_metadata", "date_updated_argovis", "source", "name", "num"],
+    "required": ["_id", "data_type", "data_info", "date_updated_argovis", "source", "name", "num"],
     "properties":{ 
         "_id": {
             "bsonType": "string"
@@ -25,7 +25,7 @@ tcMetaSchema = {
         "data_type": {
             "bsonType": "string"
         },
-        "measurement_metadata": {
+        "data_info": {
             "bsonType": "array",
             "items": {
                 "bsonType": "array",
@@ -78,7 +78,10 @@ tcSchema = {
             "bsonType": "string"
         },
         "metadata": {
-            "bsonType": "string"
+            "bsonType": "array",
+            "items": {
+                "bsonType": "string"
+            }
         },
         "geolocation": {
             "bsonType": "object",

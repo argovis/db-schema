@@ -73,7 +73,10 @@ argoSchema = {
             "bsonType": "string"
         },
         "metadata": {
-            "bsonType": "string"
+            "bsonType": "array",
+            "items": {
+                "bsonType": "string"
+            }
         },
         "geolocation": {
             "bsonType": "object",
@@ -107,7 +110,7 @@ argoSchema = {
                 }
             }
         },
-        "measurement_metadata": {
+        "data_info": {
             "bsonType": "array",
             "items": {
                 "bsonType": "array",
