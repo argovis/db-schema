@@ -152,11 +152,11 @@ drifterSchema = {
 }
 
 db.command('collMod',metacollection, validator={"$jsonSchema": driftermetaSchema}, validationLevel='strict')
-db[metacollection].create_index([("wmo", 1)])
-db[metacollection].create_index([("platform", 1)])
+#db[metacollection].create_index([("wmo", 1)])
+#db[metacollection].create_index([("platform", 1)])
 
 db.command('collMod',datacollection, validator={"$jsonSchema": drifterSchema}, validationLevel='strict')
-db[datacollection].create_index([("metadata", 1)])
-db[datacollection].create_index([("timestamp", -1), ("geolocation", "2dsphere")])
-db[datacollection].create_index([("geolocation", "2dsphere")])
-db[datacollection].create_index([("timestamp", -1)])
+#db[datacollection].create_index([("metadata", 1)])
+#db[datacollection].create_index([("timestamp", -1), ("geolocation", "2dsphere")])
+#db[datacollection].create_index([("geolocation", "2dsphere")])
+#db[datacollection].create_index([("timestamp", -1)])
