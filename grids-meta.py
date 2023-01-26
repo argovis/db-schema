@@ -1,5 +1,5 @@
 # usage: python grids-meta.py <grid name>
-# creates an empty, unindexed collection in the argo db called grids-meta with schema validation enforcement
+# creates an empty, unindexed collection in the argo db called <grid name> with schema validation enforcement
 
 from pymongo import MongoClient
 import sys
