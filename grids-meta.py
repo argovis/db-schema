@@ -13,7 +13,7 @@ db.create_collection(metacollection)
 
 gridmetaSchema = {
     "bsonType": "object",
-    "required": ["_id", "data_type", "date_updated_argovis", "source", "levels"],
+    "required": ["_id", "data_type", "date_updated_argovis", "source", "levels", "data_info"],
     "properties":{
         "_id": {
             "bsonType": "string"
@@ -52,6 +52,15 @@ gridmetaSchema = {
             "bsonType": "array",
             "items": {
                 "bsonType": ["double", "int"]
+            }
+        },
+        "data_info": {
+            "bsonType": "array",
+            "items": {
+                "bsonType": "array",
+                "items": {
+                    "bsonType": ["string", "array"]
+                }
             }
         }
     }
