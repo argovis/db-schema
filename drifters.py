@@ -17,7 +17,7 @@ db.create_collection(datacollection)
 
 driftermetaSchema = {
     "bsonType": "object",
-    "required": ["_id", "rowsize", "wmo", "expno", "deploy_date", "deploy_lon", "deploy_lat", "end_date", "end_lon", "end_lat", "drogue_lost_date", "typedeath", "typebuoy", "data_type", "date_updated_argovis", "source", "data_keys", "units", "long_name", "platform"],
+    "required": ["_id", "rowsize", "wmo", "expno", "deploy_date", "deploy_lon", "deploy_lat", "end_date", "end_lon", "end_lat", "drogue_lost_date", "typedeath", "typebuoy", "data_type", "date_updated_argovis", "source", "data_info", "platform"],
     "properties":{
         "_id": {
             "bsonType": "string"
@@ -25,17 +25,13 @@ driftermetaSchema = {
         "data_type": {
             "bsonType": "string"
         },
-        "data_keys": {
+        "data_info": {
             "bsonType": "array",
             "items": {
-                "bsonType": "string",
-                "enum": ["ve","vn","err_lon","err_lat","err_ve","err_vn","gap","sst","sst1","sst2","err_sst","err_sst1","err_sst2","flg_sst","flg_sst1","flg_sst2"]
-            }
-        },
-        "units": {
-            "bsonType": "array",
-            "items": {
-                "bsonType": ["string", "null"]
+                "bsonType": "array",
+                "items": {
+                    "bsonType": ["string", "array"]
+                }
             }
         },
         "date_updated_argovis": {
@@ -103,12 +99,6 @@ driftermetaSchema = {
         },
         "typebuoy": {
             "bsonType": "string"
-        },
-        "long_name": {
-            "bsonType": "array",
-            "items": {
-                "bsonType": ["string", "null"]
-            }
         }
     }
 }
@@ -121,7 +111,10 @@ drifterSchema = {
             "bsonType": "string"
         },
         "metadata": {
-            "bsonType": "string"
+            "bsonType": "array",
+            "items": {
+                "bsonType": "string"
+            }
         },
         "geolocation": {
             "bsonType": "object",
@@ -151,7 +144,7 @@ drifterSchema = {
             "items": {
                 "bsonType": "array",
                 "items": {
-                    "bsonType": ["double", "int", "null"]
+                    "bsonType": ["double", "int", "string", "null"]
                 }
             }
         }

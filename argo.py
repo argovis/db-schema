@@ -10,10 +10,10 @@ db = client.argo
 metacollection = 'argoMeta'
 datacollection = 'argo'
 
-# db[metacollection].drop()
-# db.create_collection(metacollection)
-# db[datacollection].drop()
-# db.create_collection(datacollection)
+db[metacollection].drop()
+db.create_collection(metacollection)
+db[datacollection].drop()
+db.create_collection(datacollection)
 
 argo_vars = ["bbp470","bbp532","bbp700","bbp700_2","bisulfide","cdom","chla","cndc","cndx","cp660","down_irradiance380","down_irradiance412","down_irradiance442","down_irradiance443","down_irradiance490","down_irradiance555","down_irradiance670","downwelling_par","doxy","doxy2","doxy3","molar_doxy","nitrate","ph_in_situ_total","pressure","salinity","salinity_sfile","temperature","temperature_sfile","turbidity","up_radiance412","up_radiance443","up_radiance490","up_radiance555"]
 argo_measurements = argo_vars + [x+'_std' for x in argo_vars] + [x+'_med' for x in argo_vars]
@@ -28,19 +28,6 @@ argoMetaSchema = {
         },
         "data_type": {
             "bsonType": "string"
-        },
-        "data_keys": {
-            "bsonType": "array",
-            "items": {
-                "bsonType": "string",
-                "enum": argo_measurements
-            }
-        },
-        "units": {
-            "bsonType": "array",
-            "items": {
-                "bsonType": ["string", "null"]
-            }
         },
         "country": {
             "bsonType": "string"
@@ -86,7 +73,10 @@ argoSchema = {
             "bsonType": "string"
         },
         "metadata": {
-            "bsonType": "string"
+            "bsonType": "array",
+            "items": {
+                "bsonType": "string"
+            }
         },
         "geolocation": {
             "bsonType": "object",
@@ -117,6 +107,15 @@ argoSchema = {
                 "bsonType": "array",
                 "items": {
                     "bsonType": ["double", "int", "string", "null"]
+                }
+            }
+        },
+        "data_info": {
+            "bsonType": "array",
+            "items": {
+                "bsonType": "array",
+                "items": {
+                    "bsonType": ["string", "array"]
                 }
             }
         },
@@ -154,27 +153,8 @@ argoSchema = {
                 "enum": ["degenerate_levels", "missing_basin", "missing_location", "missing_timestamp"]
             }
         },
-        "data_keys": {
-            "bsonType": "array",
-            "items": {
-                "bsonType": "string",
-                "enum": argo_measurements
-            }
-        },
-        "units": {
-            "bsonType": "array",
-            "items": {
-                "bsonType": ["string", "null"]
-            }
-        },
         "cycle_number": {
             "bsonType": "int"
-        },
-        "data_keys_mode": {
-            "bsonType": "array",
-            "items": {
-                "bsonType": ["string", "null"]
-            }
         },
         "geolocation_argoqc": {
             "bsonType": "int"

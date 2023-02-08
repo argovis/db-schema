@@ -17,7 +17,7 @@ db.create_collection(datacollection)
 
 tcMetaSchema = {
     "bsonType": "object",
-    "required": ["_id", "data_type", "data_keys", "units", "date_updated_argovis", "source", "name", "num"],
+    "required": ["_id", "data_type", "data_info", "date_updated_argovis", "source", "name", "num"],
     "properties":{ 
         "_id": {
             "bsonType": "string"
@@ -25,17 +25,13 @@ tcMetaSchema = {
         "data_type": {
             "bsonType": "string"
         },
-        "data_keys": {
+        "data_info": {
             "bsonType": "array",
             "items": {
-                "bsonType": "string",
-                "enum": ["wind", "surface_pressure"]
-            }
-        },
-        "units": {
-            "bsonType": "array",
-            "items": {
-                "bsonType": ["string", "null"]
+                "bsonType": "array",
+                "items": {
+                    "bsonType": ["string", "array"]
+                }
             }
         },
         "date_updated_argovis": {
@@ -82,7 +78,10 @@ tcSchema = {
             "bsonType": "string"
         },
         "metadata": {
-            "bsonType": "string"
+            "bsonType": "array",
+            "items": {
+                "bsonType": "string"
+            }
         },
         "geolocation": {
             "bsonType": "object",
@@ -112,7 +111,7 @@ tcSchema = {
             "items": {
                 "bsonType": "array",
                 "items": {
-                    "bsonType": ["double", "int", "null"]
+                    "bsonType": ["double", "int", "string", "null"]
                 }
             }
         },

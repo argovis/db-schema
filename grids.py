@@ -13,7 +13,7 @@ db.create_collection(grid)
 
 gridSchema = {
     "bsonType": "object",
-    "required": ["_id", "metadata","geolocation","data","data_keys","basin","timestamp","units"],
+    "required": ["_id", "metadata","geolocation","data","basin","timestamp"],
     "properties": {
         "_id": {
             "bsonType": "string"
@@ -52,21 +52,8 @@ gridSchema = {
             "items": {
                 "bsonType": "array",
                 "items": {
-                    "bsonType": ["double", "int", "null"]
+                    "bsonType": ["double", "int", "string", "null"]
                 }
-            }
-        },
-        "data_keys": {
-            "bsonType": "array",
-            "items": {
-                "bsonType": "string",
-                "enum": ["rg09_temperature", "rg09_salinity", "kg21_ohc15to300"]
-            }
-        },
-        "units": {
-            "bsonType": "array",
-            "items": {
-                "bsonType": ["string", "null"]
             }
         }
     }

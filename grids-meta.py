@@ -1,5 +1,5 @@
 # usage: python grids-meta.py <grid name>
-# creates an empty, unindexed collection in the argo db called grids-meta with schema validation enforcement
+# creates an empty, unindexed collection in the argo db called <grid name> with schema validation enforcement
 
 from pymongo import MongoClient
 import sys
@@ -13,7 +13,7 @@ db.create_collection(metacollection)
 
 gridmetaSchema = {
     "bsonType": "object",
-    "required": ["_id", "data_type", "date_updated_argovis", "source", "levels"],
+    "required": ["_id", "data_type", "date_updated_argovis", "source", "levels", "data_info"],
     "properties":{
         "_id": {
             "bsonType": "string"
@@ -52,6 +52,15 @@ gridmetaSchema = {
             "bsonType": "array",
             "items": {
                 "bsonType": ["double", "int"]
+            }
+        },
+        "data_info": {
+            "bsonType": "array",
+            "items": {
+                "bsonType": "array",
+                "items": {
+                    "bsonType": ["string", "array"]
+                }
             }
         }
     }
