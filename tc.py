@@ -7,8 +7,8 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-metacollection = 'tcMetax'
-datacollection = 'tcx'
+metacollection = 'tcMeta'
+datacollection = 'tc'
 
 db[metacollection].drop()
 db.create_collection(metacollection)
