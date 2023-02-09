@@ -7,17 +7,17 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-metacollection = 'covarianceMeta'
-datacollection = 'covariance'
+metacollection = 'argoneMeta'
+datacollection = 'argone'
 
 db[metacollection].drop()
 db.create_collection(metacollection)
 db[datacollection].drop()
 db.create_collection(datacollection)
 
-covarianceMetaSchema = {
+argoneMetaSchema = {
     "bsonType": "object",
-    "required": ["_id", "data_type", "data_keys", "units", "date_updated_argovis", "source", "levels"],
+    "required": ["_id", "data_type", "data_info", "date_updated_argovis", "source", "levels"],
     "properties":{
         "_id": {
             "bsonType": "string"
@@ -25,16 +25,13 @@ covarianceMetaSchema = {
         "data_type": {
             "bsonType": "string"
         },
-        "data_keys": {
+        "data_info": {
             "bsonType": "array",
             "items": {
-                "bsonType": "string"
-            }
-        },
-        "units": {
-            "bsonType": "array",
-            "items": {
-                "bsonType": ["string", "null"]
+                "bsonType": "array",
+                "items": {
+                    "bsonType": ["string", "array"]
+                }
             }
         },
         "date_updated_argovis": {
@@ -54,14 +51,14 @@ covarianceMetaSchema = {
         "levels": {
             "bsonType": "array",
             "items": {
-                "bsonType": ["int", "double"]
+                "bsonType": ["int", "string", "double"]
             }      
         }
        
     }
 }
 
-covarianceSchema = {
+argoneSchema = {
     "bsonType": "object",
     "required": ["_id","metadata","geolocation","geolocation_forecast","data"],
     "properties": {
@@ -120,8 +117,8 @@ covarianceSchema = {
     }
 }
 
-db.command('collMod',metacollection, validator={"$jsonSchema": covarianceMetaSchema}, validationLevel='strict')
+db.command('collMod',metacollection, validator={"$jsonSchema": argoneMetaSchema}, validationLevel='strict')
 
-db.command('collMod',datacollection, validator={"$jsonSchema": covarianceSchema}, validationLevel='strict')
+db.command('collMod',datacollection, validator={"$jsonSchema": argoneSchema}, validationLevel='strict')
 db[datacollection].create_index([("geolocation", "2dsphere")])
 db[datacollection].create_index([("geolocation_forecast", "2dsphere")])
