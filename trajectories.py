@@ -136,6 +136,7 @@ trajectoriesSchema = {
 }
 
 db.command('collMod',metacollection, validator={"$jsonSchema": trajectoriesMetaSchema}, validationLevel='strict')
+db[metacollection].create_index([("platform", 1)])
 
 db.command('collMod',datacollection, validator={"$jsonSchema": trajectoriesSchema}, validationLevel='strict')
 db[datacollection].create_index([("metadata", 1)])
