@@ -109,8 +109,8 @@ sstSchema = {
     }
 }
 
-db.command('collMod',metacollection, validator={"$jsonSchema": tcMetaSchema}, validationLevel='strict')
+db.command('collMod',metacollection, validator={"$jsonSchema": sstMetaSchema}, validationLevel='strict')
 db[metacollection].create_index([("name", 1)])
 
-db.command('collMod',datacollection, validator={"$jsonSchema": tcSchema}, validationLevel='strict')
+db.command('collMod',datacollection, validator={"$jsonSchema": sstSchema}, validationLevel='strict')
 db[datacollection].create_index([("geolocation", "2dsphere")])
