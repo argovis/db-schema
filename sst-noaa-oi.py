@@ -17,7 +17,7 @@ db.create_collection(datacollection)
 
 sstMetaSchema = {
     "bsonType": "object",
-    "required": ["_id", "data_type", "data_info", "date_updated_argovis", "timestamp", "source"],
+    "required": ["_id", "data_type", "data_info", "date_updated_argovis", "timeseries", "source"],
     "properties":{ 
         "_id": {
             "bsonType": "string"
@@ -40,9 +40,9 @@ sstMetaSchema = {
         "timeseries" : {
             "bsonType": "array",
             "items": {
-                "bsonType": "data"
+                "bsonType": "date"
             }
-        }
+        },
         "source": {
             "bsonType": "array",
             "items": {
@@ -66,7 +66,7 @@ sstMetaSchema = {
 
 sstSchema = {
     "bsonType": "object",
-    "required": ["_id", "metadata", "geolocation", "basin", "timestamp", "data", "record_identifier", "class"],
+    "required": ["_id", "metadata", "geolocation", "basin", "data"],
     "properties": {
         "_id": {
             "bsonType": "string"
