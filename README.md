@@ -18,6 +18,7 @@ python grids.py kg21_ohc15to300
 python grids-meta.py kg21_ohc15to300
 python covar.py
 python tc.py
+python sst-noaa-oi.py
 ```
 
 If all is well, you should have empty collections for all datasets and their metadata, with schema and indexes defined.
