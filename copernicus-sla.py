@@ -1,4 +1,4 @@
-# usage: python sst-noaa-oi.py
+# usage: python copernicus-sla.py
 # creates empty collections in the argo db with schema validation enforcement and defined indexes
 
 from pymongo import MongoClient
@@ -7,15 +7,15 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-metacollection = 'noaaOIsstMeta'
-datacollection = 'noaaOIsst'
+metacollection = 'copernicusSLAMeta'
+datacollection = 'copernicusSLA'
 
 db[metacollection].drop()
 db.create_collection(metacollection)
 db[datacollection].drop()
 db.create_collection(datacollection)
 
-sstMetaSchema = {
+slaMetaSchema = {
     "bsonType": "object",
     "required": ["_id", "data_type", "data_info", "date_updated_argovis", "timeseries", "source"],
     "properties":{ 
@@ -64,7 +64,7 @@ sstMetaSchema = {
     }
 }
 
-sstSchema = {
+slaSchema = {
     "bsonType": "object",
     "required": ["_id", "metadata", "geolocation", "basin", "data"],
     "properties": {
@@ -109,7 +109,7 @@ sstSchema = {
     }
 }
 
-db.command('collMod',metacollection, validator={"$jsonSchema": sstMetaSchema}, validationLevel='strict')
+db.command('collMod',metacollection, validator={"$jsonSchema": slaMetaSchema}, validationLevel='strict')
 
-db.command('collMod',datacollection, validator={"$jsonSchema": sstSchema}, validationLevel='strict')
+db.command('collMod',datacollection, validator={"$jsonSchema": slaSchema}, validationLevel='strict')
 db[datacollection].create_index([("geolocation", "2dsphere")])
