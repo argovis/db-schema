@@ -7,8 +7,8 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-metacollection = 'cchdoMeta'
-datacollection = 'cchdo'
+metacollection = 'cchdoMetax'
+datacollection = 'cchdox'
 
 db[metacollection].drop()
 db.create_collection(metacollection)
@@ -46,6 +46,9 @@ cchdometaSchema = {
         "expocode": {
             "bsonType": "string"
         },
+        "file_expocode": {
+            "bsonType": "string"
+        },
         "cchdo_cruise_id": {
             "bsonType": ["double", "int"]
         },
@@ -54,6 +57,9 @@ cchdometaSchema = {
             "items": {
                 "bsonType": "string"
             }
+        },
+        "positioning_system": {
+            "bsonType": "string"
         }
     }
 }
@@ -88,6 +94,12 @@ cchdoSchema = {
                 }
             }
         },
+        "btm_depth": {
+            "bsonType": "double"
+        },
+        "file_hash": {
+            "bsonType": "string"
+        },
         "basin": {
             "bsonType": "int"
         },
@@ -109,11 +121,8 @@ cchdoSchema = {
                     "url": {
                         "bsonType": "string",
                     },
-                    "doi": {
+                    "cruise_url": {
                         "bsonType": "string",
-                    },
-                    "date_updated": {
-                        "bsonType": "date",
                     }
                 }
             }
@@ -124,8 +133,7 @@ cchdoSchema = {
                 "bsonType": "string",
                 "enum": ["degenerate_levels", "missing_basin", "missing_location", "missing_timestamp"]
             }
-        },
-        
+        },        
         "station": {
             "bsonType": "string"
         },
