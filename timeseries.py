@@ -1,4 +1,5 @@
-# usage: python copernicus-sla.py
+# generic timeseries schema
+# usage: python timeseries.py [series data collection name, like 'noaaOIsst', 'copernicusSLA' or 'ccmp']
 # creates empty collections in the argo db with schema validation enforcement and defined indexes
 
 from pymongo import MongoClient
@@ -7,15 +8,15 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-metacollection = 'copernicusSLAMeta'
-datacollection = 'copernicusSLA'
+metacollection = sys.argv[1] + 'Meta'
+datacollection = sys.argv[1]
 
 db[metacollection].drop()
 db.create_collection(metacollection)
 db[datacollection].drop()
 db.create_collection(datacollection)
 
-slaMetaSchema = {
+metaSchema = {
     "bsonType": "object",
     "required": ["_id", "data_type", "data_info", "date_updated_argovis", "timeseries", "source"],
     "properties":{ 
@@ -64,7 +65,7 @@ slaMetaSchema = {
     }
 }
 
-slaSchema = {
+dataSchema = {
     "bsonType": "object",
     "required": ["_id", "metadata", "geolocation", "basin", "data"],
     "properties": {
@@ -109,7 +110,7 @@ slaSchema = {
     }
 }
 
-db.command('collMod',metacollection, validator={"$jsonSchema": slaMetaSchema}, validationLevel='strict')
+db.command('collMod',metacollection, validator={"$jsonSchema": metaSchema}, validationLevel='strict')
 
-db.command('collMod',datacollection, validator={"$jsonSchema": slaSchema}, validationLevel='strict')
+db.command('collMod',datacollection, validator={"$jsonSchema": dataSchema}, validationLevel='strict')
 db[datacollection].create_index([("geolocation", "2dsphere")])
