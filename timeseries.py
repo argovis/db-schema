@@ -10,7 +10,7 @@ client = MongoClient('mongodb://database/argo')
 db = client.argo
 
 if sys.argv[1] == 'meta':
-    metacollection = 'timeseriesMeta'
+    metacollection = 'timeseriesMetax'
     db[metacollection].drop()
     db.create_collection(metacollection)
 
@@ -58,6 +58,12 @@ if sys.argv[1] == 'meta':
                             "bsonType": "string",
                         }
                     }
+                }
+            },
+            "tpa_correction": { # copernicus sla only
+                "bsonType": "array",
+                "items": {
+                    "bsonType": ["double", "int"]
                 }
             }
         }
