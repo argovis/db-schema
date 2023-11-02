@@ -92,12 +92,21 @@ extendedMetaSchema = {
 
 extendedSchema = {
     "bsonType": "object",
-    "required": ['_id', "geolocation", "timestamp", "raster"],
+    "required": ['_id', 'metadata', "geolocation", "timestamp", "raster"],
     "properties": {
         "_id": {
             "bsonType": "string"
         },
+        "metadata": {
+            "bsonType": "string"
+        },
         "geolocation": geolocation,
+        "basins": {
+            "bsonType": "array",
+            "items": {
+                "bsonType": ["int"]
+            }
+        },
         "timestamp": timestamp,
         "raster": {
             # nominally [ [lon1, lat1, [scalars]], [lon2, lat2, [scalars]], ...]
