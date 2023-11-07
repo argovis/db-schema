@@ -71,7 +71,6 @@ if sys.argv[1] == 'meta':
                 "bsonType": "array",
                 "items": {
                     "bsonType": "object",
-                    "required": ["source"],
                     "properties": {
                         "source": {
                             "bsonType": "array",
@@ -81,6 +80,9 @@ if sys.argv[1] == 'meta':
                         },
                         "doi": {
                             "bsonType": "string",
+                        },
+                        "url": {
+                            "bsonType": "string"
                         }
                     }
                 }
@@ -102,7 +104,10 @@ else:
                 "bsonType": "string"
             },
             "metadata": {
-                "bsonType": "string"
+                "bsonType": "array",
+                "items": {
+                    "bsonType": "string"
+                }
             },
             "geolocation": geolocation,
             "basins": {
