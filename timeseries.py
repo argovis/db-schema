@@ -122,3 +122,4 @@ else:
 
     db.command('collMod',datacollection, validator={"$jsonSchema": dataSchema}, validationLevel='strict')
     db[datacollection].create_index([("geolocation", "2dsphere")])
+    db[datacollection].create_index([("geolocation.coordinates", "2d")])
