@@ -171,4 +171,5 @@ db[datacollection].create_index([("timestamp", -1), ("geolocation", "2dsphere")]
 db[datacollection].create_index([("timestamp", -1)])
 db[datacollection].create_index([("geolocation", "2dsphere")])
 db[datacollection].create_index([("source.source", 1)])
+db[datacollection].create_index([("geolocation.coordinates", "2d"), ("timestamp", -1)])
 
