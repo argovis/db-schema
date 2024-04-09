@@ -98,7 +98,7 @@ else:
     db.create_collection(datacollection)
     extendedSchema = {
         "bsonType": "object",
-        "required": ['_id', 'metadata', "geolocation", "basins", "timestamp", "raster"],
+        "required": ['_id', 'metadata', "geolocation", "basins", "timestamp", "data"],
         "properties": {
             "_id": {
                 "bsonType": "string"
@@ -117,13 +117,12 @@ else:
                 }
             },
             "timestamp": timestamp,
-            "raster": {
-                # nominally [ [lon1, lat1, [scalars]], [lon2, lat2, [scalars]], ...]
+            "data": {
                 "bsonType": "array",
                 "items": {
                     "bsonType": "array",
                     "items": {
-                        "bsonType": ["double", "int", "array"]
+                        "bsonType": ["double", "int", "string", "null"]
                     }
                 }
             },
