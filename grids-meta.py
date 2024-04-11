@@ -13,7 +13,7 @@ db.create_collection(metacollection)
 
 gridmetaSchema = {
     "bsonType": "object",
-    "required": ["_id", "data_type", "date_updated_argovis", "source", "levels", "level_units", "data_info"],
+    "required": ["_id", "data_type", "date_updated_argovis", "source", "levels", "level_units", "data_info", "lattice"],
     "properties":{
         "_id": {
             "bsonType": "string"
@@ -63,6 +63,40 @@ gridmetaSchema = {
                 "bsonType": "array",
                 "items": {
                     "bsonType": ["string", "array"]
+                }
+            }
+        },
+        "lattice": {
+            "bsonType": "object",
+            "required": ["center", "spacing", "minLat", "minLon", "maxLat", "maxLon"],
+            "properties": {
+                "center": {
+                    "bsonType": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                        "bsonType": ["double", "int"]
+                    }
+                },
+                "spacing": {
+                    "bsonType": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                        "bsonType": ["double", "int"]
+                    }
+                },
+                "minLat": {
+                    "bsonType": ["double", "int"]
+                },
+                "minLon": {
+                    "bsonType": ["double", "int"]
+                },
+                "maxLat": {
+                    "bsonType": ["double", "int"]
+                },
+                "maxLon": {
+                    "bsonType": ["double", "int"]
                 }
             }
         }

@@ -16,7 +16,7 @@ if sys.argv[1] == 'meta':
 
     metaSchema = {
         "bsonType": "object",
-        "required": ["_id", "data_type", "data_info", "date_updated_argovis", "timeseries", "source"],
+        "required": ["_id", "data_type", "data_info", "date_updated_argovis", "timeseries", "source", "lattice"],
         "properties":{ 
             "_id": {
                 "bsonType": "string"
@@ -57,6 +57,40 @@ if sys.argv[1] == 'meta':
                         "url": {
                             "bsonType": "string",
                         }
+                    }
+                }
+            },
+            "lattice": {
+                "bsonType": "object",
+                "required": ["center", "spacing", "minLat", "minLon", "maxLat", "maxLon"],
+                "properties": {
+                    "center": {
+                        "bsonType": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                            "bsonType": ["double", "int"]
+                        }
+                    },
+                    "spacing": {
+                        "bsonType": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                            "bsonType": ["double", "int"]
+                        }
+                    },
+                    "minLat": {
+                        "bsonType": ["double", "int"]
+                    },
+                    "minLon": {
+                        "bsonType": ["double", "int"]
+                    },
+                    "maxLat": {
+                        "bsonType": ["double", "int"]
+                    },
+                    "maxLon": {
+                        "bsonType": ["double", "int"]
                     }
                 }
             },
