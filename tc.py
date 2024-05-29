@@ -41,7 +41,7 @@ tcMetaSchema = {
             "bsonType": "array",
             "items": {
                 "bsonType": "object",
-                "required": ["source"],
+                "required": ["source", "url"],
                 "properties": {
                     "source": {
                         "bsonType": "array",
@@ -120,7 +120,10 @@ tcSchema = {
         },
         "class": {
             "bsonType": "string"
-        }
+        },
+        "data_warning": {
+            "bsonType": "object"
+        },
     }
 }
 
