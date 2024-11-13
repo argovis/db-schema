@@ -123,6 +123,9 @@ cchdoSchema = {
                     },
                     "cruise_url": {
                         "bsonType": "string",
+                    },
+                    "file_name": {
+                        "bsonType": "string",
                     }
                 }
             }
