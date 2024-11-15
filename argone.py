@@ -54,7 +54,9 @@ argoneMetaSchema = {
                 "bsonType": ["int", "string", "double"]
             }      
         }
-       
+        "level_units": {
+            "bsonType": "string"
+        }
     }
 }
 
