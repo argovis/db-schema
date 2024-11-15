@@ -17,9 +17,12 @@ db.create_collection(datacollection)
 
 easyoceanmetaSchema = {
     "bsonType": "object",
-    "required": ["_id","occupancies","date_updated_argovis"],
+    "required": ["_id","occupancies","date_updated_argovis","data_type"],
     "properties": {
         "_id": {
+            "bsonType": "string"
+        },
+        "data_type": {
             "bsonType": "string"
         },
         "occupancies": {
@@ -67,9 +70,6 @@ easyoceanSchema = {
             "items": {
                 "bsonType": "string"
             }
-        },
-        "data_type": {
-            "bsonType": "string"
         },
         "section_expocodes": {
             "bsonType": "array",

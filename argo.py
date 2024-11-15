@@ -29,9 +29,6 @@ argoMetaSchema = {
         "data_type": {
             "bsonType": "string"
         },
-        "country": {
-            "bsonType": "string"
-        },
         "data_center": {
             "bsonType": "string"
         },
@@ -135,9 +132,6 @@ argoSchema = {
                         }
                     },
                     "url": {
-                        "bsonType": "string",
-                    },
-                    "doi": {
                         "bsonType": "string",
                     },
                     "date_updated": {
