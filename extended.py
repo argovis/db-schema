@@ -80,9 +80,6 @@ if sys.argv[1] == 'meta':
                         },
                         "doi": {
                             "bsonType": "string",
-                        },
-                        "url": {
-                            "bsonType": "string"
                         }
                     }
                 }
