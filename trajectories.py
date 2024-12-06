@@ -7,8 +7,8 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-metacollection = 'trajectoriesMeta'
-datacollection = 'trajectories'
+metacollection = 'trajectoriesMetax'
+datacollection = 'trajectoriesx'
 
 db[metacollection].drop()
 db.create_collection(metacollection)
@@ -39,7 +39,7 @@ timestamp = {
 
 trajectoriesMetaSchema = {
     "bsonType": "object",
-    "required": ['_id', 'data_type', 'data_info', 'date_updated_argovis', 'source', 'platform', 'positioning_system', 'positioning_system_flag', 'sensor_type_flag', 'mission_flag', 'extrapolation_flag', 'platform_type'],
+    "required": ['_id', 'data_type', 'data_info', 'date_updated_argovis', 'source', 'platform', 'positioning_system_flag', 'sensor_type_flag', 'mission_flag', 'extrapolation_flag', 'platform_type'],
     "properties":{ 
         "_id": {
             "bsonType": "string"
