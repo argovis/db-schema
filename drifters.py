@@ -1,5 +1,5 @@
 # usage: python drifters.py
-# creates empty collections in the argo db called drifterMeta and drifters with schema validation enforcement and defined indexes
+# creates empty collections in the argo db called driftersMeta and drifters with schema validation enforcement and defined indexes
 
 from pymongo import MongoClient
 import sys
@@ -7,8 +7,8 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-metacollection = 'drifterMeta'
-datacollection = 'drifter'
+metacollection = 'driftersMeta'
+datacollection = 'drifters'
 
 db[metacollection].drop()
 db.create_collection(metacollection)
