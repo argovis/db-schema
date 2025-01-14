@@ -1,5 +1,5 @@
 # usage: python trajectories.py
-# creates empty collections in the argo db called trajectoriesMeta and trajectories with schema validation enforcement and defined indexes
+# creates empty collections in the argo db called argotrajectoriesMeta and argotrajectories with schema validation enforcement and defined indexes
 
 from pymongo import MongoClient
 import sys
@@ -7,8 +7,8 @@ import sys
 client = MongoClient('mongodb://database/argo')
 db = client.argo
 
-metacollection = 'trajectoriesMeta'
-datacollection = 'trajectories'
+metacollection = 'argotrajectoriesMeta'
+datacollection = 'argotrajectories'
 
 db[metacollection].drop()
 db.create_collection(metacollection)
