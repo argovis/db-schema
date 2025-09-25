@@ -167,6 +167,7 @@ cchdoSchema = {
 db.command('collMod',metacollection, validator={"$jsonSchema": cchdometaSchema}, validationLevel='strict')
 db[metacollection].create_index([("woce_lines", 1)])
 db[metacollection].create_index([("cchdo_cruise_id", 1)])
+db[metacollection].create_index([("expocode", 1)])
 
 db.command('collMod',datacollection, validator={"$jsonSchema": cchdoSchema}, validationLevel='strict')
 db[datacollection].create_index([("metadata", 1)])
