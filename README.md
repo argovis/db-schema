@@ -14,8 +14,8 @@ python grids.py rg09_temperature
 python grids-meta.py rg09_temperature
 python grids.py rg09_salinity
 python grids-meta.py rg09_salinity
-python grids.py kg21_ohc15to300
-python grids-meta.py kg21_ohc15to300
+python grids.py localGPspace_ohc15to300
+python grids-meta.py localGPspace_ohc15to300
 python covar.py
 python tc.py
 python sst-noaa-oi.py
