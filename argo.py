@@ -144,7 +144,7 @@ argoSchema = {
             "bsonType": "array",
             "items": {
                 "bsonType": "string",
-                "enum": ["degenerate_levels", "missing_basin", "missing_location", "missing_timestamp"]
+                "enum": ["degenerate_levels", "missing_basin", "missing_location", "missing_timestamp", "bgc_mismatch"]
             }
         },
         "cycle_number": {
